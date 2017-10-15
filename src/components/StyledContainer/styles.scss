@@ -1,0 +1,309 @@
+$baseClassName: 'StyledContainer';
+
+$base-spacer: 1rem;
+$base-field-padding: 0.75rem;
+$base-border-width: 1px;
+$base-border-radius: 4px;
+$base-stroke-width: 4px;
+$base-container-shadow-blur: 12px;
+$base-shadow-cast: 2px;
+$base-shadow-blur: 4px;
+
+$container-padding-xs: 0.25 * $base-spacer;
+$container-padding-s: 0.5 * $base-spacer;
+$container-padding-m: $base-spacer;
+$container-padding-l: 2 * $base-spacer;
+
+@mixin container-cover($position: 'absolute') {
+    @if $position {
+        position: $position;
+    }
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+@mixin ui-container($background-color: '#000', $border-radius: '4px') {
+    background-color: $background-color;
+    border-radius: $border-radius;
+}
+
+@mixin ui-container-border($border-color: '#000', $border-style: 'solid') {
+    border: $base-border-width $border-style $border-color;
+}
+
+@mixin ui-container-shadow($shadow-color: '#000', $shadow-blur: $base-container-shadow-blur) {
+    box-shadow: 0 0 $shadow-blur $shadow-color;
+}
+
+.#{$baseClassName} {
+    position: relative;
+    box-sizing: border-box;
+}
+
+.#{$baseClassName}--inherit {
+    position: inherit;
+}
+
+.#{$baseClassName}--cover {
+    @include container-cover();
+}
+
+.#{$baseClassName}--flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.#{$baseClassName}--flex-group {
+    min-width: 0;
+}
+
+.#{$baseClassName}--flex-no-shrink {
+    flex-shrink: 0;
+}
+
+.#{$baseClassName}--flex-shrinkwrap {
+    flex-grow: 0;
+    min-width: auto;
+}
+
+.#{$baseClassName}--flex-wrap {
+    flex-wrap: wrap;
+}
+
+.#{$baseClassName}--flex-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > .#{$baseClassName}--flex-group {
+        padding: $container-padding-m $container-padding-l;
+    }
+
+    &.#{$baseClassName}--flex-groups-lean > .#{$baseClassName}--flex-group {
+        padding-left: $container-padding-m;
+        padding-right: $container-padding-m;
+    }
+}
+
+.#{$baseClassName}--flex-horizontal,
+.#{$baseClassName}--flex-horizontal-centered {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &.#{$baseClassName}--flex-groups-border {
+        > .#{$baseClassName}--flex-group,
+        > .#{$baseClassName}--flex-horizontal,
+        > .#{$baseClassName}--flex-horizontal-centered,
+        > .#{$baseClassName}--flex-vertical {
+            border-top-width: 0;
+            border-bottom-width: 0;
+            border-right-width: 0;
+            &:first-child {
+                border-left-width: 0;
+            }
+        }
+    }
+
+    > .#{$baseClassName}--flex-group {
+        padding: $container-padding-m $container-padding-l;
+    }
+
+    &.#{$baseClassName}--flex-groups-lean > .#{$baseClassName}--flex-group {
+        padding-left: $container-padding-m;
+        padding-right: $container-padding-m;
+    }
+
+    > .#{$baseClassName}--flex-group {
+        &:not(:last-child) {
+            padding-right: $container-padding-s;
+        }
+        &:not(:first-child) {
+            padding-left: $container-padding-s;
+        }
+
+        &.#{$baseClassName}--inherit {
+            &:not(:last-child) {
+                padding-left: 0;
+            }
+            &:not(:first-child) {
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+.#{$baseClassName}--flex-horizontal-centered {
+    justify-content: center;
+}
+
+.#{$baseClassName}--flex,
+.#{$baseClassName}--flex-horizontal {
+    &.#{$baseClassName}--flex-inherit,
+    &.#{$baseClassName}--flex-inherit-horizontal {
+        > .#{$baseClassName}--flex-group {
+            &:first-child {
+                padding-left: 0;
+            }
+            &:last-child {
+                padding-right: 0;
+            }
+        }
+    }
+
+    &.#{$baseClassName}--flex-inherit,
+    &.#{$baseClassName}--flex-inherit-vertical {
+        > .#{$baseClassName}--flex-group {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+}
+
+.#{$baseClassName}--flex-vertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+
+    &.#{$baseClassName}--flex-groups-border {
+        > .#{$baseClassName}--flex-group,
+        > .#{$baseClassName}--flex-horizontal,
+        > .#{$baseClassName}--flex-horizontal-centered,
+        > .#{$baseClassName}--flex-vertical {
+            border-left-width: 0;
+            border-right-width: 0;
+            border-bottom-width: 0;
+            &:first-child {
+                border-top-width: 0;
+            }
+        }
+    }
+
+    > .#{$baseClassName}--flex-group {
+        padding: $container-padding-m $container-padding-l;
+    }
+
+    &.#{$baseClassName}--flex-groups-lean > .#{$baseClassName}--flex-group {
+        padding-left: $container-padding-m;
+        padding-right: $container-padding-m;
+    }
+
+    > .#{$baseClassName}--flex-group {
+        &:not(:last-child) {
+            padding-bottom: $container-padding-s;
+        }
+        &:not(:first-child) {
+            padding-top: $container-padding-s;
+        }
+
+        &.#{$baseClassName}--inherit {
+            &:not(:last-child) {
+                padding-bottom: 0;
+            }
+            &:not(:first-child) {
+                padding-top: 0;
+            }
+        }
+    }
+}
+
+.#{$baseClassName}--flex-center,
+.#{$baseClassName}--flex-vertical {
+    &.#{$baseClassName}--flex-inherit,
+    &.#{$baseClassName}--flex-inherit-vertical {
+        > .#{$baseClassName}--flex-group {
+            &:first-child {
+                padding-top: 0;
+            }
+            &:last-child {
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    &.#{$baseClassName}--flex-inherit,
+    &.#{$baseClassName}--flex-inherit-horizontal {
+        > .#{$baseClassName}--flex-group {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+}
+
+.#{$baseClassName}--flex-groups-border {
+    > .#{$baseClassName}--flex-group,
+    > .#{$baseClassName}--flex-horizontal,
+    > .#{$baseClassName}--flex-horizontal-centered,
+    > .#{$baseClassName}--flex-vertical {
+        @include ui-container-border();
+    }
+}
+
+.#{$baseClassName}--flex-groups-grow {
+    > .#{$baseClassName}--flex-group {
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+    > .#{$baseClassName}--flex-shrinkwrap {
+        flex-grow: 0;
+    }
+}
+
+.#{$baseClassName}--standard-shadow {
+    @include ui-container();
+    @include ui-container-border(transparent);
+    @include ui-container-shadow();
+    overflow: hidden;
+}
+
+.#{$baseClassName}--standard {
+    @include ui-container();
+    @include ui-container-border(transparent);
+    overflow: hidden;
+}
+
+.#{$baseClassName}--shaded {
+    background-color: #000;
+}
+
+.#{$baseClassName}--border {
+    @include ui-container-border();
+}
+
+.#{$baseClassName}--border-dashed {
+    @include ui-container-border(#000, dashed);
+}
+
+.#{$baseClassName}--shadow {
+    @include ui-container-shadow();
+}
+
+.#{$baseClassName}--padded {
+    padding: $container-padding-m $container-padding-l;
+}
+
+.#{$baseClassName}--padded-lean {
+    padding: $container-padding-m;
+}
+
+.#{$baseClassName}--full-height {
+    height: 100%;
+}
+
+.#{$baseClassName}--parent-height {
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.#{$baseClassName}--collapsed {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}

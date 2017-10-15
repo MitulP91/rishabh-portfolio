@@ -1,0 +1,20 @@
+$baseClassName: 'Header';
+$headerColor: tomato;
+
+.#{$baseClassName} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: $headerColor;
+    &-icon {
+        float: left;
+    }
+}
+
+.#{$baseClassName}__nav {
+    float: right;
+    &-item {
+        padding: 0 0.5rem;
+    }
+}

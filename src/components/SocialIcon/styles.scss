@@ -1,0 +1,8 @@
+$baseClassName: 'SocialIcon';
+$iconSize: 24px;
+
+.#{$baseClassName}__img {
+    height: $iconSize;
+    width: $iconSize;
+    float: right;
+}
